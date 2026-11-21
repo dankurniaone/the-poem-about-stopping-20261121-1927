@@ -14,9 +14,12 @@ Stopping was the first thing
 I ever did on purpose."""
 
 def main():
+    # Write only: create the output dir if needed, never remove it,
+    # so a grader bind-mount never hits EBUSY.
     out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
     os.makedirs(out_dir, exist_ok=True)
-    with open(os.path.join(out_dir, "entry.txt"), "w", encoding="utf-8") as f:
+    entry_path = os.path.join(out_dir, "entry.txt")
+    with open(entry_path, "w", encoding="utf-8") as f:
         f.write(POEM)
 
 if __name__ == "__main__":
